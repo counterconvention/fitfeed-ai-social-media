@@ -1,0 +1,129 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "A user profile in the social network",
+      "type": "object",
+      "properties": {
+        "username": { "type": "string", "maxLength": 30 },
+        "avatar": { "type": "string", "maxLength": 100 },
+        "email": { "type": "string", "maxLength": 150 },
+        "followerCount": { "type": "number" },
+        "followingCount": { "type": "number" },
+        "createdAt": { "type": "number" }
+      },
+      "required": ["username", "avatar", "createdAt"]
+    },
+    "Post": {
+      "title": "Post",
+      "description": "A post containing fitness tips or recipes",
+      "type": "object",
+      "properties": {
+        "authorId": { "type": "string" },
+        "authorName": { "type": "string" },
+        "authorAvatar": { "type": "string" },
+        "content": { "type": "string", "maxLength": 2000 },
+        "tags": { "type": "array", "items": { "type": "string" }, "maxItems": 5 },
+        "likesCount": { "type": "number" },
+        "commentsCount": { "type": "number" },
+        "createdAt": { "type": "number" }
+      },
+      "required": ["authorId", "authorName", "content", "createdAt"]
+    },
+    "Comment": {
+      "title": "Comment",
+      "description": "A comment on a post",
+      "type": "object",
+      "properties": {
+        "postId": { "type": "string" },
+        "authorId": { "type": "string" },
+        "authorName": { "type": "string" },
+        "authorAvatar": { "type": "string" },
+        "content": { "type": "string", "maxLength": 500 },
+        "createdAt": { "type": "number" }
+      },
+      "required": ["postId", "authorId", "authorName", "content", "createdAt"]
+    },
+    "Interaction": {
+      "title": "Interaction",
+      "description": "A like or save action",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "postId": { "type": "string" },
+        "createdAt": { "type": "number" }
+      },
+      "required": ["userId", "postId", "createdAt"]
+    },
+    "Follow": {
+      "title": "Follow",
+      "description": "A follower relationship",
+      "type": "object",
+      "properties": {
+        "followerId": { "type": "string" },
+        "followedId": { "type": "string" },
+        "createdAt": { "type": "number" }
+      },
+      "required": ["followerId", "followedId", "createdAt"]
+    },
+    "Notification": {
+      "title": "Notification",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "message": { "type": "string" },
+        "createdAt": { "type": "number" }
+      },
+      "required": ["title", "message", "createdAt"]
+    },
+    "SupportChat": {
+      "title": "SupportChat",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "userName": { "type": "string" },
+        "userAvatar": { "type": "string" },
+        "lastMessage": { "type": "string" },
+        "lastMessageTime": { "type": "number" }
+      }
+    },
+    "SupportMessage": {
+      "title": "SupportMessage",
+      "type": "object",
+      "properties": {
+        "role": { "type": "string" },
+        "text": { "type": "string" },
+        "createdAt": { "type": "number" }
+      }
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/User" }
+    },
+    "/posts/{postId}": {
+      "schema": { "$ref": "#/entities/Post" }
+    },
+    "/posts/{postId}/comments/{commentId}": {
+      "schema": { "$ref": "#/entities/Comment" }
+    },
+    "/likes/{likeId}": {
+      "schema": { "$ref": "#/entities/Interaction" }
+    },
+    "/saves/{saveId}": {
+      "schema": { "$ref": "#/entities/Interaction" }
+    },
+    "/follows/{followId}": {
+      "schema": { "$ref": "#/entities/Follow" }
+    },
+    "/notifications/{notificationId}": {
+      "schema": { "$ref": "#/entities/Notification" }
+    },
+    "/support_chats/{chatId}": {
+      "schema": { "$ref": "#/entities/SupportChat" }
+    },
+    "/support_chats/{chatId}/messages/{messageId}": {
+      "schema": { "$ref": "#/entities/SupportMessage" }
+    }
+  }
+}

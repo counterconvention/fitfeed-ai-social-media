@@ -1,0 +1,6 @@
+{
+  "name": "FitFeed",
+  "description": "Uma rede social mobile-first para compartilhar receitas, notícias e dicas do mundo fitness, com feed infinito e auxílio de IA.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
