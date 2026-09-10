@@ -9,12 +9,11 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { auth, db, getGuestUser } from './lib/firebase';
 import { doc, getDoc, collection, query, orderBy, limit, onSnapshot } from 'firebase/firestore';
 import { User, AppNotification } from './types';
-import { Loader2, Home, Search, PlusSquare, User as UserIcon, Bot, Settings, Headset, Bell, Activity, Apple } from 'lucide-react';
+import { Loader2, Home, Search, PlusSquare, User as UserIcon, Bot, Settings, Headset, Bell, Activity } from 'lucide-react';
 import Feed from './components/Feed';
 import AdminFeed from './components/AdminFeed';
 import CreatePost from './components/CreatePost';
 import Profile from './components/Profile';
-import NutritionTracker from './components/NutritionTracker';
 import AuthScreen from './components/AuthScreen';
 import AIAssistant from './components/AIAssistant';
 import Support from './components/Support';
@@ -33,7 +32,6 @@ function AnimatedRoutes({ user, handleSetUser }: { user: User, handleSetUser: (u
         <Route path="/admin" element={<motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.15 }} className="h-full flex flex-col"><AdminFeed user={user} /></motion.div>} />
         <Route path="/create" element={<motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.15 }} className="h-full flex flex-col"><CreatePost user={user} /></motion.div>} />
         <Route path="/profile" element={<motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.15 }} className="h-full flex flex-col"><Profile user={user} setUser={handleSetUser} /></motion.div>} />
-        <Route path="/tracker" element={<motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.15 }} className="h-full flex flex-col"><NutritionTracker user={user} /></motion.div>} />
         <Route path="/ai" element={<motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.15 }} className="h-full flex flex-col"><AIAssistant user={user} /></motion.div>} />
         <Route path="/support" element={<motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.15 }} className="h-full flex flex-col"><Support user={user} /></motion.div>} />
         <Route path="/notifications" element={<motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.15 }} className="h-full flex flex-col"><Notifications user={user} /></motion.div>} />
@@ -243,9 +241,6 @@ export default function App() {
                       <Settings className="w-6 h-6" />
                     </Link>
                   )}
-                  <Link to="/tracker" className="p-2 text-zinc-500 dark:text-zinc-400 hover:text-green-600 dark:hover:text-green-400 flex flex-col items-center">
-                    <Apple className="w-6 h-6" />
-                  </Link>
                   <Link to="/create" className="p-2 text-zinc-500 dark:text-zinc-400 hover:text-green-600 dark:hover:text-green-400 flex flex-col items-center">
                     <PlusSquare className="w-6 h-6" />
                   </Link>
